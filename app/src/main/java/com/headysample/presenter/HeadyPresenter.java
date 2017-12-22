@@ -1,6 +1,7 @@
 package com.headysample.presenter;
 
 
+import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.db.HeadyMapper;
 import com.headysample.model.response.AllData;
@@ -86,8 +87,8 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
         realm = Realm.getDefaultInstance();
         HeadyDb dbData = realm.where(HeadyDb.class)
                 .findFirst();
-        System.out.println("Heady db size - "+dbData.toString());
         if(dbData != null){
+            System.out.println("Heady db size - "+dbData.toString());
             return true;
         }else{
             return false;
@@ -96,12 +97,17 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
 
     public void getDataForIdFromDatabase(String id) {
         realm = Realm.getDefaultInstance();
-        HeadyDb dbData = realm.where(HeadyDb.class)
-                .equalTo("id",id)
-                .findFirst();
-        System.out.println("Heady db presenter ID - "+dbData.toString());
+        /*HeadyDb dbData = realm.where(HeadyDb.class)
+                .findFirst();*/
+       // if(dbData != null){
+            Categories categories = realm.where(Categories.class)
+                    .equalTo("id",id)
+                    .findFirst();
+        //}
+
+        System.out.println("Heady db presenter ID - "+categories.toString());
         //getView().onClearItems();
-        getView().onFilteredDataLoaded(dbData);
+        getView().onFilteredDataLoaded(categories);
 
         //getView().onHideDialog();
     }

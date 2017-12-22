@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.content.Context;
 
 import com.headysample.R;
+import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.response.AllData;
 import com.headysample.view.activities.DetailsActivity;
@@ -22,7 +23,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     private Context mContext;
     private AllData mImageList = null;
     private LayoutInflater mLayoutInflater;
-    private HeadyDb dbData;
+    private Categories categories;
 
     public DetailAdapter(Context context, LayoutInflater layoutInflater) {
         mLayoutInflater = layoutInflater;
@@ -46,13 +47,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     @Override
     public void onBindViewHolder(DetailAdapter.ViewHolder holder, int position) {
 
-        final int currentPosition =position;
+        final int currentPosition = position;
 
-        holder.txtProductsName.setText(dbData.getCategories().get(position).getName());
-        holder.txtProductDateAdded.setText(dbData.getCategories().get(position).getName());
-        holder.txtProductsName.setText(dbData.getCategories().get(position).getName());
-        holder.txtProductsName.setText(dbData.getCategories().get(position).getName());
-        holder.txtProductsName.setText(dbData.getCategories().get(position).getName());
+        holder.txtProductsName.setText(categories.getProducts().get(position).getName());
+        holder.txtProductDateAdded.setText(categories.getProducts().get(position).getDate_added());
+        holder.txtProductTaxName.setText(categories.getProducts().get(position).getTax().getName());
+        holder.txtProductTaxValue.setText(categories.getProducts().get(position).getTax().getValue());
 
 
         //GlideApp.with(this).load(dbData.getCategories().get(position).).into(holder.displayImage);
@@ -62,9 +62,9 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        if(dbData != null){
+        if(categories != null){
             //return mImageList.getCategories().size();
-            return dbData.getCategories().size();
+            return categories.products.size();
         }else{
             return  0;
         }
@@ -97,8 +97,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-    public void addDbData(HeadyDb dbData){
-        this.dbData = dbData;
+    public void addDbData(Categories categories){
+        this.categories = categories;
         notifyDataSetChanged();
     }
 

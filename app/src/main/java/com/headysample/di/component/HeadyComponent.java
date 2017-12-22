@@ -2,6 +2,7 @@ package com.headysample.di.component;
 
 import com.headysample.di.module.HeadyModule;
 import com.headysample.di.scope.PerActivity;
+import com.headysample.view.activities.DetailsActivity;
 import com.headysample.view.activities.MainActivity;
 
 import dagger.Component;
@@ -14,6 +15,7 @@ import dagger.Provides;
 @Component(modules = HeadyModule.class,dependencies = ApplicationComponent.class)
 public interface HeadyComponent {
 
-    void inject(MainActivity activity);
+    void inject(MainActivity mainActivity);
+    void inject(DetailsActivity detailsActivity);
 
 }

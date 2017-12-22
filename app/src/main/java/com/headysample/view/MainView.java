@@ -1,5 +1,6 @@
 package com.headysample.view;
 
+import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.response.AllData;
 
@@ -23,6 +24,6 @@ public interface MainView extends BaseView {
 
     void onDataLoadedFromDb(HeadyDb dbData);
 
-    void onFilteredDataLoaded(HeadyDb dbData);
+    void onFilteredDataLoaded(Categories categories);
 
 }

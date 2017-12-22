@@ -7,6 +7,7 @@ import com.headysample.di.component.DaggerApplicationComponent;
 import com.headysample.di.module.ApplicationModule;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by nndra on 06-Dec-17.
@@ -20,6 +21,12 @@ public class HeadyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Realm.init(this);
+
+        RealmConfiguration myConfig = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(myConfig);
+
         initializeApplicationModules();
     }
 

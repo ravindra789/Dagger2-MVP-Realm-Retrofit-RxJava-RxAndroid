@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.headysample.R;
 import com.headysample.di.component.DaggerHeadyComponent;
+import com.headysample.di.component.DaggerHeadyComponent;
 import com.headysample.di.module.HeadyModule;
+import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.response.AllData;
 import com.headysample.presenter.HeadyPresenter;
@@ -114,7 +116,7 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void onFilteredDataLoaded(HeadyDb dbData) {
+    public void onFilteredDataLoaded(Categories categories) {
 
     }
 }
