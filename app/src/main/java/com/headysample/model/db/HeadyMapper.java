@@ -29,11 +29,13 @@ public class HeadyMapper {
 
         if(allData != null){
             realm = Realm.getDefaultInstance();
-            realm.executeTransactionAsync(new Realm.Transaction() {
+            addDataToDB(realm,allData);
+
+            /*realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
                 public void execute(Realm bgRealm) {
                     System.out.println("Heady Mapper - mapAllDatatoDb");
-                    addDataToDB(bgRealm,allData);
+
 
                 }
             }, new Realm.Transaction.OnSuccess() {
@@ -49,7 +51,7 @@ public class HeadyMapper {
                     // Transaction failed and was automatically canceled.
                     System.out.println("Heady Mapper - addDataToDB - error "+error.getMessage());
                 }
-            });
+            });*/
 
             //dbUpdateCompleted.dataAdded();
         }
@@ -57,7 +59,7 @@ public class HeadyMapper {
 
     private void addDataToDB(Realm bgRealm, AllData allData) {
 
-
+        bgRealm.beginTransaction();
         // increatement index
         Number maxId = bgRealm.where(HeadyDb.class).max("id");
         int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
@@ -135,6 +137,8 @@ public class HeadyMapper {
 
 
         bgRealm.copyToRealmOrUpdate(headyDb);
+
+        bgRealm.commitTransaction();
 
     }
 

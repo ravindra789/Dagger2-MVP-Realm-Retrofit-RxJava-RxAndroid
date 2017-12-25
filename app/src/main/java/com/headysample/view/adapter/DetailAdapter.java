@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.content.Context;
 
@@ -13,6 +15,8 @@ import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.response.AllData;
 import com.headysample.view.activities.DetailsActivity;
+
+import java.util.ArrayList;
 
 /**
  * Created by nndra on 22-Dec-17.
@@ -24,6 +28,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     private AllData mImageList = null;
     private LayoutInflater mLayoutInflater;
     private Categories categories;
+    private ArrayList<String> variantsList ;
 
     public DetailAdapter(Context context, LayoutInflater layoutInflater) {
         mLayoutInflater = layoutInflater;
@@ -54,6 +59,25 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         holder.txtProductTaxName.setText(categories.getProducts().get(position).getTax().getName());
         holder.txtProductTaxValue.setText(categories.getProducts().get(position).getTax().getValue());
 
+        categories.getProducts().get(position).getVariants();
+
+
+        variantsList = new ArrayList<String>();
+        for (int i=0; i<categories.getProducts().get(position).getVariants().size();i++) {
+            variantsList.add(""+categories.getProducts().get(position).getVariants());
+            holder.txtDisplayProductVariants.setText(" "+categories.getProducts().get(position).getVariants()+" ,");
+        }
+
+
+
+       /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_spinner_item, variantsList);
+
+        adapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        holder.horizontalScrollView.setAdapter(adapter);
+*/
 
         //GlideApp.with(this).load(dbData.getCategories().get(position).).into(holder.displayImage);
 
@@ -74,6 +98,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtProductsName, txtProductDateAdded, txtDisplayProductVariants, txtProductTaxName, txtProductTaxValue;
+        HorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +108,9 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
             txtDisplayProductVariants = (TextView) itemView.findViewById(R.id.txt_display_product_variants);
             txtProductTaxName = (TextView) itemView.findViewById(R.id.txt_product_tax_name);
             txtProductTaxValue = (TextView) itemView.findViewById(R.id.txt_product_tax_value);
+            horizontalScrollView = (HorizontalScrollView) itemView.findViewById(R.id.hor_display_scroll);
+
+
 
         }
     }

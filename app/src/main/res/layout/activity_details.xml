@@ -45,7 +45,7 @@
             android:id="@+id/txt_detail_categories_name_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Categories"
+            android:text="Categorie Details"
             android:textSize="20sp"
             android:layout_below="@+id/ll_detail_search"
             android:gravity="center"

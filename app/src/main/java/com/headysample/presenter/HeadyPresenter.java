@@ -54,6 +54,7 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
     public void onNext(AllData allData) {
         headyMapper.mapAllDatatoDb(allData);
         System.out.println("Heady db next - "+allData.toString());
+        getDataFromDatabase();
         //getView().onDataLoaded(allData);
 
         //need to add db logic here here
