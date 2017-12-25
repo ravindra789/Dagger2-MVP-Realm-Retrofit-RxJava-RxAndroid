@@ -65,7 +65,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         variantsList = new ArrayList<String>();
         for (int i=0; i<categories.getProducts().get(position).getVariants().size();i++) {
             variantsList.add(""+categories.getProducts().get(position).getVariants());
-            holder.txtDisplayProductVariants.setText(" "+categories.getProducts().get(position).getVariants()+" ,");
+            holder.txtDisplayProductVariants.setText(" "+categories.getProducts().get(position).getVariants().get(i).getColor()+" ,");
         }
 
 
