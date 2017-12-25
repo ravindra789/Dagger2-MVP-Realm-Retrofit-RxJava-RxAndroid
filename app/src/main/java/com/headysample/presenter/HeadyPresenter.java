@@ -4,6 +4,7 @@ package com.headysample.presenter;
 import com.headysample.model.db.Categories;
 import com.headysample.model.db.HeadyDb;
 import com.headysample.model.db.HeadyMapper;
+import com.headysample.model.db.Products;
 import com.headysample.model.response.AllData;
 import com.headysample.util.RestApi;
 import com.headysample.view.MainView;
@@ -101,14 +102,9 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
 
     public void getDataForIdFromDatabase(String id) {
         realm = Realm.getDefaultInstance();
-        /*HeadyDb dbData = realm.where(HeadyDb.class)
-                .findFirst();*/
-       // if(dbData != null){
             Categories categories = realm.where(Categories.class)
                     .equalTo("id",id)
                     .findFirst();
-        //}
-
         System.out.println("Heady db presenter ID - "+categories.toString());
         //getView().onClearItems();
         getView().onFilteredDataLoaded(categories);
@@ -116,40 +112,34 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
         //getView().onHideDialog();
     }
 
-
-   /* @Override
-    public void dataAdded() {
-        realm = Realm.getDefaultInstance();
-        RealmResults<HeadyDb> dbData = realm.where(HeadyDb.class)
-                .findAll();
-        System.out.println("Heady db presenter - "+dbData.toString());
-        getView().onClearItems();
-        getView().onDataLoadedFromDb(dbData);
-        getView().onHideDialog();
-    }*/
-
-   /* void filter(String searchString){
-        List<Categories> realmResults = new ArrayList();
+   /* public void filter(String searchString, int status) {
 
         if (searchString == null || "".equals(searchString)) {
 
-            appUsersData = realm.where(Categories.class).equalTo("user_status",1).findAllSorted("user_name", Sort.ASCENDING);
-            nonAppUsersData = realm.where(Categories.class).equalTo("user_status",0).findAllSorted("first_name_on_device", Sort.ASCENDING);
+            if (status == 0) {
 
-            realmResults.addAll(appUsersData);
-            realmResults.addAll(nonAppUsersData);
+                Categories categories = realm.where(Categories.class)
+                        .equalTo("name", searchString)
+                        .findFirst();
+                getView().onFilteredDataLoaded(categories);
 
-            *//*realmResults = realm.where(QuiphTable.class)
-                    .findAll();*//*
-        } else {
-            realmResults = realm.where(Categories.class)
+            } else {
+
+                Products products = realm.where(Products.class)
+                        .equalTo("name", searchString)
+                        .findFirst();
+
+
+
+            }
+
+        }else{
+            HeadyDb headyDb= realm.where(HeadyDb.class)
                     .contains("first_name_on_device", searchString, Case.INSENSITIVE)
                     .or()
                     .contains("user_name", searchString, Case.INSENSITIVE)
                     .findAll();
-        }
-        mAdapter.updateList(realmResults);
-
+            }
     }*/
 
 }
