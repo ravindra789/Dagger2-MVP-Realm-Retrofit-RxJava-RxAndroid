@@ -64,11 +64,11 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
         variantsList = new ArrayList<String>();
         for (int i=0; i<categories.getProducts().get(position).getVariants().size();i++) {
-            variantsList.add(""+categories.getProducts().get(position).getVariants());
-            holder.txtDisplayProductVariants.setText(" "+categories.getProducts().get(position).getVariants().get(i).getColor()+" ,");
+            variantsList.add(" "+categories.getProducts().get(position).getVariants().get(i).getColor());
+            //holder.txtDisplayProductVariants.setText(" "+categories.getProducts().get(position).getVariants().get(i).getColor()+" ,");
         }
 
-
+        holder.txtDisplayProductVariants.setText(""+variantsList);
 
        /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
                 android.R.layout.simple_spinner_item, variantsList);

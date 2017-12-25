@@ -8,6 +8,7 @@ import com.headysample.model.response.AllData;
 import com.headysample.util.RestApi;
 import com.headysample.view.MainView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,8 +16,10 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 
 /**
@@ -124,4 +127,29 @@ public class HeadyPresenter extends BasePresenter<MainView> implements Observer<
         getView().onDataLoadedFromDb(dbData);
         getView().onHideDialog();
     }*/
+
+   /* void filter(String searchString){
+        List<Categories> realmResults = new ArrayList();
+
+        if (searchString == null || "".equals(searchString)) {
+
+            appUsersData = realm.where(Categories.class).equalTo("user_status",1).findAllSorted("user_name", Sort.ASCENDING);
+            nonAppUsersData = realm.where(Categories.class).equalTo("user_status",0).findAllSorted("first_name_on_device", Sort.ASCENDING);
+
+            realmResults.addAll(appUsersData);
+            realmResults.addAll(nonAppUsersData);
+
+            *//*realmResults = realm.where(QuiphTable.class)
+                    .findAll();*//*
+        } else {
+            realmResults = realm.where(Categories.class)
+                    .contains("first_name_on_device", searchString, Case.INSENSITIVE)
+                    .or()
+                    .contains("user_name", searchString, Case.INSENSITIVE)
+                    .findAll();
+        }
+        mAdapter.updateList(realmResults);
+
+    }*/
+
 }
